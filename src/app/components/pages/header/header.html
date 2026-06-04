@@ -1,0 +1,29 @@
+<nav>
+  <app-indicador style="--tabela-bg: #04AA6D; --tabela-color: #fff; width: 100%;"
+    [classeDiv]="'indicadores'"
+    [classImg]="'saldo'"
+    [texto]="'Saldo'"
+    [valor]="'5.000,00'"
+    (open)="abre($event)"
+  ></app-indicador>
+  <app-indicador style="--tabela-bg: #d4af37; --tabela-color: #fff; width: 100%;"
+    [classeDiv]="'indicadores'"
+    [classImg]="'disabled'"
+    [texto]="'Gasto'"
+    [valor]="'1.180,00'"
+  ></app-indicador>
+  <app-indicador style="--tabela-bg: #726e6e; --tabela-color: #fff; width: 100%;"
+    [classeDiv]="'indicadores'"
+    [classImg]="'disabled'"
+    [texto]="'Quitado'"
+    [valor]="'2.420,00'"
+  ></app-indicador>
+  <app-indicador style="--tabela-bg: #4f5af5; --tabela-color: #fff; width: 100%;"
+    [classeDiv]="'indicadores'"
+    [classImg]="'disabled'"
+    [texto]="'Positivo'"
+    [valor]="'1.400,00'"
+  ></app-indicador>
+</nav>
+<app-modal [tipoExibicao]="'table'" [isVisible]="isModalVisible" (close)="recebe($event)"></app-modal>
+

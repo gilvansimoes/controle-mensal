@@ -1,0 +1,15 @@
+<section class="section">
+    <div class="principals">
+        <app-table
+            [categoria]="'gastos'"
+            [tipo]="'gastos'"
+            [dadosTable]="dados"
+            [colunas]="colunas"
+        ></app-table>
+    </div>
+</section>
+<app-modal 
+    [tipoExibicao]="'login'"
+    [isVisible]="isModalVisible" 
+    (close)="recebe($event)">
+</app-modal>

@@ -1,0 +1,10 @@
+<div  class="button"
+  class="button"
+  [style.background-image]="
+    hover
+      ? 'url(' + imagemHover + ')'
+      : 'url(' + imagem + ')'
+  "
+  (mouseenter)="hover = true"
+  (mouseleave)="hover = false">
+</div>

@@ -1,0 +1,17 @@
+<label>
+    <div class="sidebar hidden">
+        <h1>Menu</h1>
+        <div class="sidebarAjuste">
+            <ul>
+                <li (click)="abrirModalLogin()"><div class="login-menu"></div><div class="login-texto">Login</div></li>
+                <li (click)="abrirModalSaldo()"><div class="saldo-menu"></div><div class="saldo-texto">Saldo</div></li>
+                <li (click)="abrirModalGasto()"><div class="gasto-menu"></div><div class="gasto-texto">Gasto</div></li>
+            </ul>
+            <div class="menuLateralAjuste" [style.display]="ocultarMenu ? 'none' : 'flex'">
+                <div class="menuLateral"
+                    [class.aberta]="!sidebarHidden"
+                (click)="toggleSidebarHidden()"></div>
+            </div>
+        </div>
+    </div>
+</label>

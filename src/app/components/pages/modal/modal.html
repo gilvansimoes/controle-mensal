@@ -1,0 +1,85 @@
+<div class="dados" [ngStyle]="{'display': isVisible ? 'flex' : 'none'}">
+    <div class="modal-content">
+        <div class="modal-top">
+            <img src="/close.svg" alt="Close" class="close-icon" (click)="closeModal()">
+        </div>
+        @if (tipoExibicao === "table") {
+            <h2>Cadastro do Saldo</h2>
+            <div class="modal-cadastroCentro">
+            <div class="modal-cadastro">
+                <input type="month" id="saldo-data" name="data" [(ngModel)]="dia">
+                <div class="input-container">
+                    <input type="text" id="saldo-descricao" placeholder=" " [(ngModel)]="descricao" autocomplete="off">
+                    <label for="saldo-descricao">Descrição:</label>
+                </div>
+                <div class="input-container valor">
+                    <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left', allowNegative: true }" type="text" id="saldo-valor" placeholder=" " [(ngModel)]="valor" autocomplete="off">
+                    <label for="saldo-valor">Valor:</label>
+                </div>
+            </div>
+            </div>
+            <div class="btn">
+                <input type="button" value="Salvar" (click)="salvarSaldo()">
+                <input type="button" value="Fechar" (click)="closeModal()">
+            </div>
+            <div class="modal-table">
+                <app-table
+                    [categoria]="'saldo'"
+                    [tipo]="'saldos'"
+                    [colunas]="colunas"
+                    [dadosTable]="dados"
+                ></app-table>
+            </div>
+        }
+        @if (tipoExibicao === "formulario") {
+            <h2>Cadastro de Gastos</h2>
+            <div class="modal-cadastroCentro">
+            <div class="modal-cadastro">
+                
+                <select id="dia" [(ngModel)]="dia">
+                    <option value="" disabled selected>Dia:</option>
+                        @for (dia of dias; track dia) {
+                            <option [value]="dia">
+                                {{ dia }}
+                            </option>
+                        }
+                </select>
+                <div class="input-container">
+                    <input type="text" id="gasto-descricao" placeholder=" " [(ngModel)]="descricao" autocomplete="off">
+                    <label for="gasto-descricao">Descrição:</label>
+                </div>
+                <div class="input-container valor">
+                    <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left', allowNegative: true }" type="text" id="gasto-valor" placeholder=" " [(ngModel)]="valor" autocomplete="off">
+                    <label for="gasto-valor">Valor:</label>
+                </div>
+                </div>
+            </div>
+            <div class="btn">
+                <input type="button" value="Salvar" (click)="salvarGasto()">
+                <input type="button" value="Fechar" (click)="closeModal()">
+            </div>
+        }
+        @if (tipoExibicao === "login") {
+            <h2>Login</h2>
+            <div class="modal-cadastroLogin">
+                <div class="input-container">
+                    <input type="text" id="usuario" placeholder=" " [(ngModel)]="usuario" autocomplete="off">
+                    <label for="usuario">Usuário:</label>
+                </div>
+                <div class="input-container">
+                    <input type="password" id="senha" placeholder=" " [(ngModel)]="senha" autocomplete="off">
+                    <label for="senha">Senha:</label>
+                </div>
+                <span class="register">Não tem uma conta? <a href="#" (click)="closeModal(); registro()">Registre-se</a></span>
+                <span class="ou">OU</span>
+                <div class="login-google">
+                    <button type="button" class="buttonLogin"><img src="/pesquisa32.png" alt="Google Icon">Login com Google</button>
+                </div>
+            </div>
+            <div class="btn-login">
+                <input type="button" value="Salvar" (click)="salvarGasto()">
+                <input type="button" value="Fechar" (click)="closeModal()">
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="campo-data">
+    <div class="data">
+        <input type="month" id="data-principal" name="data" [(ngModel)]="dataAtual">
+    </div>
+    <div class="texto-cadastro">Cadastrar Gasto</div>
+    <div class="cadastro">
+        <div class="buton-cadastro" (click)="abre(true)"></div>
+    </div>
+</div>
+<app-modal 
+    [tipoExibicao]="'formulario'"
+    [isVisible]="isModalVisible" 
+    (close)="recebe($event)">
+</app-modal>

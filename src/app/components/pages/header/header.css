@@ -1,0 +1,31 @@
+* {
+
+  box-sizing: border-box;
+}
+nav {
+  display: flex;
+  background: rgb(247 245 245);
+  border-radius: 8px;
+  box-shadow: 0 4px 30px rgb(0 0 0 / 30%);
+  backdrop-filter: blur(17.2px);
+  -webkit-backdrop-filter: blur(17.2px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  padding: 10px;
+  gap: 2%;
+  letter-spacing: 1px;
+}
+p {
+  text-align: center;
+}
+.saldo {
+  background-color: var(--tabela-bg, lightgray);
+}
+.gastos {
+  background-color: gold;
+}
+.quitado {
+  background-color: lightgray;
+}
+.positivo {
+  background-color: #2196F3;
+}

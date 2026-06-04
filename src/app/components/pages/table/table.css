@@ -1,0 +1,78 @@
+.principal {
+    flex: 1;
+    overflow: auto;
+    border-radius: 8px 8px 0 0; 
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.table th,
+.table td {
+    border: 1px solid #e4e2e2;
+    padding: 4.5px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.table th {
+    background-color: var(--tabela-bg, lightgray);
+    color: var(--table-bg, black);
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.table tr:hover {
+    background-color: black;
+}
+
+.editar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit {
+    background-image: url('/menu-quadrados.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 23px;
+    height: 20px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.edit:hover {
+    background-image: url('/menu-quadrad.png');
+    transform: scale(1.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.edit:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+input[type="checkbox"] {
+    width: 100%;
+    cursor: pointer;
+}
+input[type="checkbox"]:active {
+    transform: scale(0.7);
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
