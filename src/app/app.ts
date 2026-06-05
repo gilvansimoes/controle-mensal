@@ -11,10 +11,25 @@ import { Sidebar } from './components/pages/sidebar/sidebar';
   selector: 'app-root',
   imports: [RouterOutlet, Header, Section, Footer, CampoData, Sidebar],
   templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  styleUrls: ['./app.css'],
 })
 export class App {
   protected readonly title = signal('controle-mensal');
   iconeMenu = '/menu-lateral.png';
   iconeMenuHover = '/menuLateral.png';
+
+  larguraTela = 0;
+  alturaTela = 0;
+
+  ngOnInit() {
+    this.obterDimensoes();
+  }
+
+  obterDimensoes() {
+    this.larguraTela = window.innerWidth;
+    this.alturaTela = window.innerHeight;
+
+    console.log('Largura:', this.larguraTela);
+    console.log('Altura:', this.alturaTela);
+  }
 }
