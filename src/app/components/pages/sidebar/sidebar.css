@@ -136,7 +136,7 @@ li:active .login-menu {
   background-color: rgb(247 245 245);
   box-shadow: 17px 0px 30px -6px rgb(0 0 0 / 30%);
   width: 46px;
-  height: 40px;
+  height: 44px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -182,7 +182,7 @@ li:active .login-menu {
   }
 }
 @media screen and (height > 770px) {
-  .menuLateralAjuste {
-    top: -7px;
+  .sidebar {
+    top: 14.5%;
   }
 }
