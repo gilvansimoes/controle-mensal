@@ -181,8 +181,8 @@ li:active .login-menu {
     right: -15px;
   }
 }
-@media screen and (height > 770px) {
+@media screen and (height > 769px) {
   .sidebar {
-    top: 14.5%;
+    top: calc(133% * (100 / 868));
   }
 }
