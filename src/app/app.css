@@ -8,10 +8,3 @@
 .sidebar {
   display: none;
 }
-p {
-  font-size: 18px;
-  font-weight: 600;
-  color: #000000;
-  position: absolute;
-  top: 85%;
-}

@@ -18,7 +18,7 @@ export class App {
   iconeMenu = '/menu-lateral.png';
   iconeMenuHover = '/menuLateral.png';
 
-  larguraTela = 0;
+  /*larguraTela = 0;
   alturaTela = 0;
 
   ngOnInit() {
@@ -31,5 +31,5 @@ export class App {
 
     console.log('Largura:', this.larguraTela);
     console.log('Altura:', this.alturaTela);
-  }
+  }*/
 }
