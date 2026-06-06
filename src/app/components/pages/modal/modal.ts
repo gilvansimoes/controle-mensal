@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Table } from "../table/table";
-import { CurrencyMaskModule } from "ng2-currency-mask";
+import { Table } from '../table/table';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,11 +21,11 @@ export class Modal {
   colunas = [
     { chave: 'descricao', titulo: 'Descrição', tipo: 'texto' },
     { chave: 'valor', titulo: 'Valor', tipo: 'moeda' },
-    { chave: 'editar', titulo: 'Editar', tipo: 'botao' }
+    { chave: 'editar', titulo: 'Editar', tipo: 'botao' },
   ];
   dados = [
     { id: 1, descricao: 'Mãe', valor: '2.500,00' },
-    { id: 2, descricao: 'Pai', valor: '2.500,00' }
+    { id: 2, descricao: 'Pai', valor: '2.500,00' },
   ];
 
   @Input() tipoExibicao: 'table' | 'formulario' | 'login' = 'table';
@@ -49,7 +49,7 @@ export class Modal {
         //id: this.dados.length + 1,
         descricao: this.descricao,
         valor: this.valor,
-        dia: this.dia
+        dia: this.dia,
       };
       //console.log(novoSaldo);
       //this.dados.push(novoSaldo);
@@ -63,7 +63,7 @@ export class Modal {
         //id: this.dados.length + 1,
         descricao: this.descricao,
         valor: this.valor,
-        dia: this.dia
+        dia: this.dia,
       };
       //console.log(novoGasto);
       //this.dados.push(novoGasto);
@@ -143,6 +143,26 @@ export class Modal {
             backdrop-filter: blur(7px);
             -webkit-backdrop-filter: blur(7px);
           }
+          .senha-container {
+            position: relative;
+            width: 76%;
+          }
+          .senha-container .h3_2 {
+            width: 100%;
+            padding-right: 35px;
+            box-sizing: border-box;
+          }
+          .olho {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            user-select: none;
+          }
+          .senha-status {
+            text-align: center;
+          }
           @media screen and (width <= 768px) {
             .principal-registro {
               width: 100%;
@@ -150,33 +170,127 @@ export class Modal {
             .h3_2 {
               width: 55%;
             }
-          }   
+            .senha-container {
+              width: 56.5%;
+            }
+          }
         </style>
         <div class="principalRegistro-Center">
           <div class="principal-registro">
             <div class="second">
               <label class="h3_1">Nome:</label>
-              <input type="text" class="h3_2" value=""></input>
+              <input type="text" class="h3_2" value="" required focus></input>
             </div>
             <div class="second">
               <label class="h3_1">Usuário:</label>
-              <input type="text" class="h3_2" value=""></input>
+              <input type="text" class="h3_2" value="" required></input>
             </div>
             <div class="second">
               <label class="h3_1">E-mail:</label>
-              <input type="email" class="h3_2" value=""></input>
+              <input type="email" class="h3_2" value="" required></input>
             </div>
             <div class="second">
               <label class="h3_1 senha">Senha:</label>
-              <input type="password" class="h3_2" value=""></input>
+              <div class="senha-container">
+                <input type="password" class="h3_2 senha-input" value="" required><span class="olho olho-senha">👁️</span></input>
+              </div>
             </div>
             <div class="second">
               <label class="h3_1 confirmar-senha">Confirmar Senha:</label>
-              <input type="password" class="h3_2" value=""></input>
+              <div class="senha-container">
+                <input type="password" class="h3_2 confirmar-senha-input" value="" required><span class="olho olho-confirmar">👁️</span></input>
+              </div>
             </div>
+            <div class="senha-status"></div>
           </div>
-        </div>    
+        </div>
       `,
+      preConfirm: () => {
+        const inputs = document.querySelectorAll('.principal-registro input');
+
+        for (const input of inputs) {
+          const campo = input as HTMLInputElement;
+
+          if (!campo.value.trim()) {
+            campo.focus();
+
+            Swal.showValidationMessage('Todos os campos são obrigatórios');
+
+            return false;
+          }
+        }
+        const email = (inputs[2] as HTMLInputElement).value.trim();
+
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!regexEmail.test(email)) {
+          (inputs[2] as HTMLInputElement).focus();
+
+          Swal.showValidationMessage('Digite um e-mail válido');
+
+          return false;
+        }
+
+        const senha = document.querySelector('.senha-input') as HTMLInputElement;
+        const confirmar = document.querySelector('.confirmar-senha-input') as HTMLInputElement;
+
+        if (senha.value !== confirmar.value) {
+          Swal.showValidationMessage('As senhas devem ser iguais');
+
+          return false;
+        }
+
+        return true;
+      },
+      didOpen: () => {
+        const senha = document.querySelector('.senha-input') as HTMLInputElement;
+        const confirmar = document.querySelector('.confirmar-senha-input') as HTMLInputElement;
+        const status = document.querySelector('.senha-status') as HTMLElement;
+
+        const validarSenhas = () => {
+          if (!senha.value && !confirmar.value) {
+            senha.style.border = '1px solid #ccc';
+            confirmar.style.border = '1px solid #ccc';
+
+            status.textContent = '';
+            return;
+          }
+
+          if (senha.value === confirmar.value) {
+            senha.style.border = '2px solid green';
+            confirmar.style.border = '2px solid green';
+
+            /*status.textContent = '✓ Senhas coincidem';
+            status.style.color = 'green';*/
+          } else {
+            senha.style.border = '2px solid red';
+            confirmar.style.border = '2px solid red';
+
+            /*status.textContent = '✗ Senhas diferentes';
+            status.style.color = 'red';*/
+          }
+        };
+
+        senha.addEventListener('input', validarSenhas);
+        confirmar.addEventListener('input', validarSenhas);
+
+        validarSenhas();
+
+        document.querySelectorAll('.olho').forEach((icone) => {
+          icone.addEventListener('click', () => {
+            const container = (icone as HTMLElement).parentElement;
+            const input = container?.querySelector('input') as HTMLInputElement;
+
+            if (input.type === 'password') {
+              input.type = 'text';
+              (icone as HTMLElement).textContent = '🙈';
+            } else {
+              input.type = 'password';
+              (icone as HTMLElement).textContent = '👁️';
+            }
+          });
+        });
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         const principalDiv = document.querySelector('.principal-registro') as HTMLElement;
@@ -187,7 +301,7 @@ export class Modal {
           Swal.fire({
             icon: 'error',
             title: 'Senhas diferentes',
-            text: 'Os campos de senha devem ser iguais.'
+            text: 'Os campos de senha devem ser iguais.',
           });
           return;
         }
@@ -195,32 +309,31 @@ export class Modal {
           nome: (inputs[0] as HTMLInputElement).value,
           usuario: (inputs[1] as HTMLInputElement).value,
           email: (inputs[2] as HTMLInputElement).value,
-          senha: senha
+          senha: senha,
         };
         console.log(dados);
       }
-      /*this.equipServ.atualizarEquipamento(dados).subscribe*/({
-      next: () => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Dados salvos com sucesso',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        //this.busca();
-      },
-      error: (err: any) => {
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'Erro ao salvar dados',
-          text: err.message || 'Erro desconhecido',
-          showConfirmButton: true,
-        });
-      },
+      /*this.equipServ.atualizarEquipamento(dados).subscribe*/ ({
+        next: () => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Dados salvos com sucesso',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          //this.busca();
+        },
+        error: (err: any) => {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Erro ao salvar dados',
+            text: err.message || 'Erro desconhecido',
+            showConfirmButton: true,
+          });
+        },
       });
-            
     });
   }
 }
