@@ -1,37 +1,42 @@
 <div class="principal">
-    <table class="table">
-        <thead>
-            <tr>
-                 @for (col of colunas; track col.chave) {
-                   <th>{{ col.titulo }}</th> 
+  <table class="table">
+    <thead>
+      <tr>
+        @for (col of colunas; track col.chave) {
+          <th>{{ col.titulo }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of dadosTable; track $index) {
+        <tr id="{{ tipo + '-' + item.id }}" [ngClass]="getClasseLinha(item)">
+          @for (col of colunas; track col.chave) {
+            @if (item[col.chave] !== '') {
+              <td>
+                @switch (col.tipo) {
+                  @case ('checkbox') {
+                    <input
+                      type="checkbox"
+                      [checked]="item[col.chave]"
+                      [disabled]="item[col.chave]"
+                    />
+                  }
+                  @case ('botao') {
+                    <div
+                      id="{{ tipo + '-' + item.id }}"
+                      class="edit"
+                      (click)="editar(item, tipo)"
+                    ></div>
+                  }
+                  @default {
+                    {{ item[col.chave] }}
+                  }
                 }
-            </tr>
-        </thead>
-        <tbody>
-            @for (item of dadosTable; track $index) {
-                <tr id="{{ tipo + '-' + item.id }}">
-                    @for (col of colunas; track col.chave) {
-                        @if (item[col.chave] !== "") {
-                            <td>
-                                @switch (col.tipo) {
-                                    @case ('checkbox') {
-                                      <input 
-                                        type="checkbox"
-                                        [checked]="item[col.chave]"
-                                        [disabled]="item[col.chave]"/>
-                                    }
-                                    @case ('botao') {
-                                       <div  id="{{ tipo + '-' + item.id }}" class="edit" (click)="editar(item, tipo)"></div>
-                                    }
-                                    @default {
-                                    {{ item[col.chave] }}
-                                    }
-                                }
-                            </td>
-                        }
-                    }
-                </tr>
+              </td>
             }
-        </tbody>
-    </table>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
 </div>

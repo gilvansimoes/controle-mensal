@@ -15,28 +15,49 @@ export class Table {
   @Input() categoria: string = '';
   @Input() tipo: string = '';
 
+  getClasseLinha(item: any): string {
+    if (item.pago) {
+      return 'linha-verde';
+    }
+    console.log('item.diaVencimento:', item);
+    const hoje = new Date();
+    const diaAtual = hoje.getDate();
+    const diasRestantes = item.dia - diaAtual;
+    // Entre 10 e 3 dias
+    if (diasRestantes <= 8 && diasRestantes > 3) {
+      return 'linha-amarela';
+    }
+    // 3 dias ou menos, ou vencido
+    if (diasRestantes <= 3) {
+      return 'linha-vermelha';
+    }
+    return '';
+  }
+
   editar(item: any, tipo: string) {
-    let filtroEdit: any[] | undefined  = this.dadosTable?.filter((equipSel) => equipSel.id === item.id);
-      
-      if (!filtroEdit || filtroEdit.length === 0) {
-        return;
-      }
-      const Toast = Swal.mixin({
-        toast: true,
-        icon: 'success',
-        title: 'Busca realizada com sucesso!',
-        showCloseButton: true,
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'Salvar',
-        denyButtonText: 'Não',
-        backdrop: 'rgba(0, 0, 0, 0.2)'
-      });
-      Toast.fire({
-        icon: 'info',
-        title: 'Edição!',
-        width: '100%',
-        html: `
+    let filtroEdit: any[] | undefined = this.dadosTable?.filter(
+      (equipSel) => equipSel.id === item.id,
+    );
+
+    if (!filtroEdit || filtroEdit.length === 0) {
+      return;
+    }
+    const Toast = Swal.mixin({
+      toast: true,
+      icon: 'success',
+      title: 'Busca realizada com sucesso!',
+      showCloseButton: true,
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Salvar',
+      denyButtonText: 'Não',
+      backdrop: 'rgba(0, 0, 0, 0.2)',
+    });
+    Toast.fire({
+      icon: 'info',
+      title: 'Edição!',
+      width: '100%',
+      html: `
             <style>
               .h3_1 {
                 font-size: 14px;
@@ -89,50 +110,50 @@ export class Table {
                 <label class="h3_1">Pago:</label>
                 <input type="checkbox" class="h3_2" ${filtroEdit[0].pago ? 'checked' : ''}></input>
               </div>
-            </div>  
+            </div>
             `,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          const principalDiv = document.querySelector(`.${this.tipo}`) as HTMLElement;
-          const inputs = principalDiv.querySelectorAll('input');
-  
-          if(this.tipo === 'gastos') {
-            const dados = {
-                id: item.id,
-                dia: inputs[0]?.value || filtroEdit[0].dia,
-                descricao: inputs[1]?.value || filtroEdit[0].descricao,
-                valor: inputs[2]?.value || filtroEdit[0].valor,
-                pago: (inputs[3] as HTMLInputElement)?.checked ?? filtroEdit[0].pago,
-              };
-          } else {
-            const dados = {
-              id: item.id,
-              descricao: inputs[1]?.value || filtroEdit[0].descricao,
-              valor: inputs[2]?.value || filtroEdit[0].valor,
-            };
-          }
-/*this.equipServ.atualizarEquipamento(dados).subscribe*/({
-            next: () => {
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Dados salvos com sucesso',
-                showConfirmButton: false,
-                timer: 1500,
-              });
-              //this.busca();
-            },
-            error: (err: any) => {
-              Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'Erro ao salvar dados',
-                text: err.message || 'Erro desconhecido',
-                showConfirmButton: true,
-              });
-            },
-          });
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const principalDiv = document.querySelector(`.${this.tipo}`) as HTMLElement;
+        const inputs = principalDiv.querySelectorAll('input');
+
+        if (this.tipo === 'gastos') {
+          const dados = {
+            id: item.id,
+            dia: inputs[0]?.value || filtroEdit[0].dia,
+            descricao: inputs[1]?.value || filtroEdit[0].descricao,
+            valor: inputs[2]?.value || filtroEdit[0].valor,
+            pago: (inputs[3] as HTMLInputElement)?.checked ?? filtroEdit[0].pago,
+          };
+        } else {
+          const dados = {
+            id: item.id,
+            descricao: inputs[1]?.value || filtroEdit[0].descricao,
+            valor: inputs[2]?.value || filtroEdit[0].valor,
+          };
         }
-      });
+        /*this.equipServ.atualizarEquipamento(dados).subscribe*/ ({
+          next: () => {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Dados salvos com sucesso',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            //this.busca();
+          },
+          error: (err: any) => {
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Erro ao salvar dados',
+              text: err.message || 'Erro desconhecido',
+              showConfirmButton: true,
+            });
+          },
+        });
+      }
+    });
   }
 }

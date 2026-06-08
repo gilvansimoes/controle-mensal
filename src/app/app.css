@@ -8,3 +8,60 @@
 .sidebar {
   display: none;
 }
+.status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+.status .branco {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #000000;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+}
+.status .verde {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #000000;
+  background-color: rgb(136, 194, 136);
+  border-radius: 50%;
+}
+.status .amarela {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #000000;
+  background-color: #e5cd84;
+  border-radius: 50%;
+}
+.status .vermelha {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #000000;
+  background-color: #da9097;
+  border-radius: 50%;
+}
+.status span {
+  display: inline-block;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+.status-pendente,
+.status-pago,
+.status-vencido,
+.status-normal {
+  border: 1px solid #000000;
+  border-radius: 4px;
+  padding: 3px;
+  font-weight: bold;
+  left: 0.5px;
+}
