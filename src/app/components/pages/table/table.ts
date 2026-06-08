@@ -19,7 +19,6 @@ export class Table {
     if (item.pago) {
       return 'linha-verde';
     }
-    console.log('item.diaVencimento:', item);
     const hoje = new Date();
     const diaAtual = hoje.getDate();
     const diasRestantes = item.dia - diaAtual;

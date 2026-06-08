@@ -15,11 +15,11 @@ export class Section {
 
   dados = [
     { id: 1, dia: '01', descricao: 'Energia', valor: '230,00', pago: false },
-    { id: 2, dia: '02', descricao: 'Agua', valor: '120,00', pago: true },
-    { id: 3, dia: '03', descricao: 'Intenet', valor: '99,00', pago: false },
-    { id: 4, dia: '04', descricao: 'Cartao', valor: '1.300,00', pago: true },
-    { id: 5, dia: '05', descricao: 'Aluguel', valor: '851,00', pago: false },
-    { id: 6, dia: '06', descricao: 'Lazer', valor: '1.000,00', pago: true },
+    { id: 2, dia: '06', descricao: 'Agua', valor: '120,00', pago: true },
+    { id: 3, dia: '11', descricao: 'Intenet', valor: '99,00', pago: false },
+    { id: 4, dia: '16', descricao: 'Cartao', valor: '1.300,00', pago: false },
+    { id: 5, dia: '21', descricao: 'Aluguel', valor: '851,00', pago: false },
+    { id: 6, dia: '26', descricao: 'Lazer', valor: '1.000,00', pago: true },
   ];
   colunas = [
     { chave: 'dia', titulo: 'Dia', tipo: 'data' },
