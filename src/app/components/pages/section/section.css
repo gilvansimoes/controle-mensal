@@ -10,3 +10,8 @@
   z-index: 0;
   overflow-y: scroll;
 }
+@media screen and (height > 832px) {
+  section {
+    height: 69vh;
+  }
+}
