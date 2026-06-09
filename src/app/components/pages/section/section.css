@@ -11,7 +11,7 @@
   overflow-y: scroll;
 }
 @media screen and (height > 832px) {
-  section {
+  .section {
     height: 69vh;
   }
 }
