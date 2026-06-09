@@ -10,8 +10,8 @@
   z-index: 0;
   overflow-y: scroll;
 }
-@media screen and (height > 832px) {
+@media screen and (height > 825px) {
   .section {
-    height: 67vh;
+    height: 66vh;
   }
 }
